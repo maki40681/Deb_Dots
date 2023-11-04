@@ -1,14 +1,14 @@
 format = "  $directory$battery$character"
 
 [character]
-success_symbol = "[ ](bold red)[  ](bold green)"
-error_symbol = "[ ](bold red)[  ](bold red)"
-vicmd_symbol = "[ ](bold red)[  ](bold blue)"
+success_symbol = "[ ](bold red)[ ➜ ](bold green)"
+error_symbol = "[ ](bold red)[ ➜ ](bold red)"
+vicmd_symbol = "[ ](bold red)[ ➜ ](bold blue)"
 
 [battery]
-full_symbol = " "
-charging_symbol = " "
-discharging_symbol = " "
+full_symbol = "󰁹 "
+charging_symbol = "󰂄 "
+discharging_symbol = "󰂃 "
 
 [[battery.display]]
 threshold = 90
@@ -17,7 +17,7 @@ style = "bold red"
 [directory]
 truncation_length = 1
 truncate_to_repo = true
-home_symbol="ﰣ "
+home_symbol="󰜥 "
 style = "bold purple"
-read_only = "  "
+read_only = "󰌾 "
 read_only_style = "bold blue"
