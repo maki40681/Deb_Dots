@@ -1,39 +1,14 @@
 #!/bin/sh
 
 logout(){
-dmenu="$(printf ":b 鈴 Sleep\n:b  Shutdown\n:b  Logout\n:b ﰇ Restart " \
-	| dmenu -c -p "RUN " -l 7 -fn "JetBrainsMono Nerd Font:size=13" -bw 3)"
+dmenu="$(printf ":b  Sleep\n:b  Shutdown\n:b  Logout\n:b  Restart " \
+	| dmenu -c -p "RUN " -l 7 -fn "JetBrainsMono NF:size=13" -bw 3)"
 
 case $dmenu in
-    ":b  Logout" ) if [ "$XDG_SESSION_TYPE" = "tty" ]
-		    then
-		      xsetroot -name fsignal:1
-		    else
-		      riverctl exit
-		    fi ;;
+    ":b  Sleep" ) systemctl suspend ;;
     ":b  Shutdown" ) systemctl poweroff ;;
-    ":b 鈴 Sleep" ) systemctl suspend ;;
-    ":b ﰇ Restart " ) systemctl reboot
-esac
-}
-
-refstbg(){
-    [ ! -e ~/.cache/st_layer.ff ] && \
-      ff-blank 1920 1080 11520 11520 11520 59000 > ~/.cache/st_layer.ff
-    ff-composite < ~/.cache/st_bg.ff ~/.cache/st_layer.ff 0,0,2 > ~/.cache/st_wallpaper.ff
-}
-
-rstbg(){
-  horny(){
-    jpg2ff < "$(find /home/triplek/MEGA/wallhaven -type f -printf "%T+\t%p\n" | sort -r | awk '{print $2}' | shuf -n 1)" > ~/.cache/st_bg.ff; say refstbg; pidof st | xargs kill -s USR1
-  }
-  hornybonk(){
-    jpg2ff < "$(find /home/triplek/MEGA/WallHaven -type f -printf "%T+\t%p\n" | sort -r | awk '{print $2}' | shuf -n 1)" > ~/.cache/st_bg.ff; say refstbg; pidof st | xargs kill -s USR1
-  }
-
-case $1 in
-  horny ) horny ;;
-  horny- ) hornybonk ;;
+    ":b  Logout" ) xsetroot -name fsignal:1 ;;
+    ":b  Restart " ) systemctl reboot
 esac
 }
 
@@ -41,14 +16,12 @@ _tmux(){
 tmux ls 2> /dev/null
 if [ $? = 1 ]; then
 printf "Starting TMUX session\n" && \
-    tmux new -s TMUX -d && \
-    tmux rename-window -t TMUX:1 ' terminal' && \
+    tmux -u new -s TMUX -d && \
+    tmux rename-window -t TMUX:1 '    terminal ' && \
     tmux new-window -t TMUX && \
-    tmux rename-window -t TMUX:2 ' file_manager' && \
+    tmux rename-window -t TMUX:2 '    file_manager ' && \
     tmux new-window -t TMUX && \
-    tmux rename-window -t TMUX:3 ' text_editor' && \
-    tmux new-window -t TMUX && \
-    tmux rename-window -t TMUX:4 ' music_player' && \
+    tmux rename-window -t TMUX:3 '    text_editor ' && \
     tmux send-keys -t TMUX:2 'while true; do; ranger && clear; done' C-m && \
     tmux send-keys -t TMUX:3 'cd ~/.git-repos/satan_cultists && while true; do; nvim; done' C-m && \
     tmux select-window -t 1
@@ -57,37 +30,7 @@ else
 fi
 }
 
-viewimg(){
-  horny(){
-    xsetroot -name fsignal:3; \
-    # shellcheck disable=SC2046
-    sxiv -A 60 -s F -t $(find /home/triplek/MEGA/wallhaven -type f -printf "%T+\t%p\n" \
-    | sort -r \
-    | awk '{print $2}'); \
-    xsetroot -name fsignal:3
-  }
-
-  hornybonk(){
-    xsetroot -name fsignal:3; \
-    # shellcheck disable=SC2046
-    sxiv -A 60 -s F -t $(find /home/triplek/MEGA/WallHaven -type f -printf "%T+\t%p\n" \
-    | sort -r \
-    | awk '{print $2}'); \
-    xsetroot -name fsignal:3
-  }
-
-case $1 in
-  horny ) horny ;;
-  horny- ) hornybonk ;;
-esac
-}
-
 case $1 in
     logout ) logout ;;
-    horny ) rstbg horny ;;
-    horny- ) rstbg horny- ;;
-    refstbg ) refstbg ;;
     tmux ) _tmux ;;
-    viewhorny ) viewimg horny ;;
-    viewhorny- ) viewimg horny- ;;
 esac
