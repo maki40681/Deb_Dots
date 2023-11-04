@@ -1,36 +1,36 @@
-#=-[INTERACTIVE SHELL CHECK]-=#
-[[ $- != *i* ]] && return
-
 #=-[HISTORY MANAGEMENT]-=#
 HISTSIZE=1000
 SAVEHIST=1000
-setopt share_history
-setopt HIST_SAVE_NO_DUPS
-HISTFILE=$XDG_DATA_HOME/zsh/history
+HISTFILE=~/.config/zsh/.zsh_history
+setopt histignorealldups sharehistory
 
-#=-[TAB COMPLETE]-=#
-setopt autocd
-zstyle ':completion:*' menu select cache-path \
-				    $XDG_DATA_HOME/zsh/zcompcache
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
-				    'r:|[._-]=* r:|=*' \
-				    'l:|=* r:|=*'
-zmodload zsh/complist
+#=-[MODERN COMPLETION SYSTEM]-=#
+autoload -Uz compinit
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 
-autoload compinit
-compinit -d $XDG_DATA_HOME/zsh/zcompdump
-_comp_options+=(globdots)
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' menu select=2
+eval "$(dircolors -b)"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+zstyle ':completion:*' menu select=long
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' use-compctl false
+zstyle ':completion:*' verbose true
 
-autoload bashcompinit
-bashcompinit
-source ~/.local/share/bash-completion/completions/riverctl
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 #=-[ALIASES]-=#
 alias \
       ll='exa -lah' \
       killmux='tmux kill-session -t TMUX' \
-      sx='exec startx "$XDG_CONFIG_HOME/X11/xinitrc" &> /tmp/dwm.log' \
-      wl='exec dbus-run-session river &> /tmp/river.log'
+      sx='ssh-agent startx "$XDG_CONFIG_HOME/X11/xinitrc" &> /tmp/dwm.log' \
 
 alias \
       pkgr='sudo apt remove' \
@@ -63,18 +63,6 @@ pkgfs()
   | less
 }
 
-rnamewall()
-{
-  for file in $(ls ~/MEGA/wallhaven \
-    | egrep -v '^.{6}\.jpg$')
-  do
-    cd ~/MEGA/wallhaven
-    mv -v "$file" $(tr -dc a-z0-9 < /dev/urandom \
-		    | head -c 6; echo '').jpg
-    cd - > /dev/null
-  done
-}
-
 slbuild()
 {
   make install; rm *.o
@@ -87,15 +75,9 @@ stove()
   stow .; cd - > /dev/null
 }
 
-yt()
-{
-  choice=$(ytfzf -tL "$1")
-  yt-dlp -f 247+251 -o "~/VIDs/%(id)s.%(ext)s" "$choice"
-}
-
 #=-[ZSH PLUGINS]-=#
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.local/share/zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.local/share/zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 #=-[KEYBINDS]-=#
