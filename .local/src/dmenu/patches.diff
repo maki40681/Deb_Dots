@@ -1,15 +1,17 @@
 diff --git a/patches.def.h b/patches.def.h
-index cc9cf74..9ab3fa3 100644
+index 2190e87..8aeca05 100644
 --- a/patches.def.h
 +++ b/patches.def.h
-@@ -11,18 +11,18 @@
+@@ -17,7 +17,7 @@
   * or xyw patches, to make the menu stand out from similarly coloured windows.
   * http://tools.suckless.org/dmenu/patches/border/
   */
 -#define BORDER_PATCH 0
 +#define BORDER_PATCH 1
  
- /* This patch makes dmenu case-insensitive by default, replacing the
+ /* By default the caret in dmenu has a width of 2 pixels. This patch makes that configurable
+  * as well as overridable via a command line option.
+@@ -29,12 +29,12 @@
   * case-insensitive -i option with a case sensitive -s option.
   * http://tools.suckless.org/dmenu/patches/case-insensitive/
   */
@@ -22,9 +24,9 @@ index cc9cf74..9ab3fa3 100644
 -#define CENTER_PATCH 0
 +#define CENTER_PATCH 1
  
- /* This patch enables color emoji in dmenu by removing a workaround for a BadLength error
-  * in the Xft library when color glyphs are used.
-@@ -51,7 +51,7 @@
+ /* Minor patch to enable the use of Ctrl+v (XA_PRIMARY) and Ctrl+Shift+v (CLIPBOARD) to paste.
+  * By default dmenu only supports Ctrl+y and Ctrl+Shift+y to paste.
+@@ -55,7 +55,7 @@
   * line height patch and as such is intended to be combined with these.
   * https://tools.suckless.org/dmenu/patches/emoji-highlight/
   */
@@ -33,16 +35,16 @@ index cc9cf74..9ab3fa3 100644
  
  /* This patch make it so that fuzzy matches gets highlighted and is therefore meant
   * to be used together with the fuzzymatch patch.
-@@ -63,7 +63,7 @@
+@@ -67,7 +67,7 @@
   * portions of the string to be matched.
   * https://tools.suckless.org/dmenu/patches/fuzzymatch/
   */
 -#define FUZZYMATCH_PATCH 0
 +#define FUZZYMATCH_PATCH 1
  
- /* Allows dmenu's entries to be rendered in a grid by adding a new -g flag to specify
-  * the number of grid columns. The -g and -l options can be used together to create a
-@@ -122,7 +122,7 @@
+ /* Adds fzf-like functionality for dmenu.
+  * Refer to https://github.com/DAFF0D11/dafmenu/ for documentation and example use cases.
+@@ -119,7 +119,7 @@
   * integrate dmenu with other UI elements that require a particular vertical size.
   * http://tools.suckless.org/dmenu/patches/line-height/
   */
@@ -51,7 +53,7 @@ index cc9cf74..9ab3fa3 100644
  
  /* This patch adds a -wm flag which sets override_redirect to false; thus letting your window
   * manager manage the dmenu window.
-@@ -189,7 +189,7 @@
+@@ -192,7 +192,7 @@
  /* Adds text which displays the number of matched and total items in the top right corner of dmenu.
   * https://tools.suckless.org/dmenu/patches/numbers/
   */
@@ -60,16 +62,7 @@ index cc9cf74..9ab3fa3 100644
  
  /* This patch adds simple markup for dmenu using pango markup.
   * This depends on the pango library v1.44 or greater.
-@@ -241,7 +241,7 @@
- /* This patch changes the behaviour of matched items and the Tab key to allow tab completion.
-  * https://tools.suckless.org/dmenu/patches/prefix-completion/
-  */
--#define PREFIXCOMPLETION_PATCH 0
-+#define PREFIXCOMPLETION_PATCH 1
- 
- /* This patch adds an option -ps to specify an item by providing the index that should be
-  * pre-selected.
-@@ -291,7 +291,7 @@
+@@ -312,7 +312,7 @@
   * is too long or there are too many options to be shown in dmenu in one line, to be defined.
   * https://tools.suckless.org/dmenu/patches/symbols/
   */
@@ -78,7 +71,7 @@ index cc9cf74..9ab3fa3 100644
  
  /* With this patch dmenu will split input lines at first tab character and only display first
   * part, but it will perform matching on and output full lines as usual.
-@@ -325,7 +325,7 @@
+@@ -346,7 +346,7 @@
   *
   * https://tools.suckless.org/dmenu/patches/xresources/
   */

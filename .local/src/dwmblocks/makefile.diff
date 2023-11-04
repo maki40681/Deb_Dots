@@ -1,12 +1,13 @@
 diff --git a/Makefile b/Makefile
-index 99db3d6..35600c0 100644
+index f68eff9..15c34ff 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -1,6 +1,6 @@
- .POSIX:
+@@ -8,7 +8,7 @@ INC_DIR := include
+ VERBOSE := 0
+ LIBS := xcb-atom
  
--PREFIX = /usr/local
-+PREFIX = $(HOME)/.local
- CC = gcc
- 
- dwmblocks: main.o
+-PREFIX := /usr/local
++PREFIX := $(HOME)/.local
+ CFLAGS := -Ofast -I. -I$(INC_DIR) -std=c99
+ CFLAGS += -DBINARY=\"$(BIN)\" -D_POSIX_C_SOURCE=200809L
+ CFLAGS += -Wall -Wpedantic -Wextra -Wswitch-enum

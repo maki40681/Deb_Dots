@@ -1,29 +1,41 @@
 diff --git a/config.h b/config.h
-index 3e07365..1f3ff6e 100644
+index 4e619d8..f702f0e 100644
 --- a/config.h
 +++ b/config.h
-@@ -1,16 +1,11 @@
--#define CMDLENGTH 45
+@@ -1,13 +1,13 @@
+ #pragma once
+ 
+ // String used to delimit block outputs in the status.
 -#define DELIMITER "  "
--#define CLICKABLE_BLOCKS
-+#define CMDLENGTH 10000
 +#define DELIMITER "   "
  
- const Block blocks[] = {
--	BLOCK("sb-mail",    1800, 17),
--	BLOCK("sb-music",   0,    18),
--	BLOCK("sb-disk",    1800, 19),
--	BLOCK("sb-memory",  10,   20),
--	BLOCK("sb-loadavg", 5,    21),
--	BLOCK("sb-mic",     0,    26),
--	BLOCK("sb-record",  0,    27),
--	BLOCK("sb-volume",  0,    22),
--	BLOCK("sb-battery", 5,    23),
--	BLOCK("sb-date",    1,    24)
-+	BLOCK("dwm_bar net",  3,  6),
-+	BLOCK("dwm_bar tmp",  3,  5),
-+	BLOCK("dwm_bar cpu",  3,  4),
-+	BLOCK("dwm_bar ram",  3,  3),
-+	BLOCK("dwm_bar vol",  0,  2),
-+	BLOCK("dwm_bar clk",  60, 1)
- };
+ // Maximum number of Unicode characters that a block can output.
+-#define MAX_BLOCK_OUTPUT_LENGTH 45
++#define MAX_BLOCK_OUTPUT_LENGTH 1000
+ 
+ // Control whether blocks are clickable.
+-#define CLICKABLE_BLOCKS 1
++#define CLICKABLE_BLOCKS 0
+ 
+ // Control whether a leading delimiter should be prepended to the status.
+ #define LEADING_DELIMITER 0
+@@ -17,13 +17,9 @@
+ 
+ // Define blocks for the status feed as X(cmd, interval, signal).
+ #define BLOCKS(X)         \
+-    X("sb-mail", 600, 1)  \
+-    X("sb-music", 0, 2)   \
+-    X("sb-disk", 1800, 3) \
+-    X("sb-memory", 10, 4) \
+-    X("sb-loadavg", 5, 5) \
+-    X("sb-mic", 0, 6)     \
+-    X("sb-record", 0, 7)  \
+-    X("sb-volume", 0, 8)  \
+-    X("sb-battery", 5, 9) \
+-    X("sb-date", 1, 10)
++    X("dwm_bar net", 3, 6)  \
++    X("dwm_bar tmp", 3, 5)   \
++    X("dwm_bar cpu", 3, 4) \
++    X("dwm_bar ram", 3, 3) \
++    X("dwm_bar vol", 0, 2) \
++    X("dwm_bar clk", 60, 1)
