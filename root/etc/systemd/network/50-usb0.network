@@ -1,6 +1,0 @@
-[Match]
-Name=usb0
-
-[Network]
-Gateway=192.168.147.208
-Address=192.168.147.82/24
