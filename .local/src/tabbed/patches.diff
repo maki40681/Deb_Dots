@@ -1,0 +1,76 @@
+diff --git a/patches.def.h b/patches.def.h
+index e5adbdf..c0d8445 100644
+--- a/patches.def.h
++++ b/patches.def.h
+@@ -19,7 +19,7 @@
+ /* This patch hides the tab bar if only one tab is open.
+  * https://tools.suckless.org/tabbed/patches/autohide/
+  */
+-#define AUTOHIDE_PATCH 0
++#define AUTOHIDE_PATCH 1
+ 
+ /* Named after the window title bar patch for dwm this patch divides the
+  * tab bar space evenly between the tabbed windows.
+@@ -34,7 +34,7 @@
+ /* Only show the basename of the tabbed title; useful with zathura. Toggle with -b.
+  * https://tools.suckless.org/tabbed/patches/basenames/
+  */
+-#define BASENAME_PATCH 0
++#define BASENAME_PATCH 1
+ 
+ /* This patch moves the tabs / bar to the bottom of the tabbed window.
+  * https://github.com/bakkeby/patches/blob/master/tabbed/tabbed-bottomtabs-0.6-20200512-dabf6a2.diff
+@@ -45,17 +45,17 @@
+  * https://www.reddit.com/r/suckless/comments/oi4zjl/tabbed_text_alignment/
+  * https://github.com/bakkeby/patches/blob/master/tabbed/tabbed-center-0.6-20200512-dabf6a2.diff
+  */
+-#define CENTER_PATCH 0
++#define CENTER_PATCH 1
+ 
+ /* This patch prints the position number of the client before the window title.
+  * https://tools.suckless.org/tabbed/patches/clientnumber/
+  */
+-#define CLIENTNUMBER_PATCH 0
++#define CLIENTNUMBER_PATCH 1
+ 
+ /* Adds support for dragging tabs left and right using the mouse.
+  * https://tools.suckless.org/tabbed/patches/drag/
+  */
+-#define DRAG_PATCH 0
++#define DRAG_PATCH 1
+ 
+ /* This patch hides all the tabs and only shows them when Mod+Shift is pressed. All functions
+  * with switching, rotating, and creating tabs involve Mod+Shift. When not doing one of these
+@@ -63,7 +63,7 @@
+  * This patch relies on the keyrelease patch to support show/hide on keypress/keyrelease.
+  * https://tools.suckless.org/tabbed/patches/hidetabs/
+  */
+-#define HIDETABS_PATCH 0
++#define HIDETABS_PATCH 1
+ 
+ /* This patch gives tabbed an icon. This icon is the currently selected tab's icon.
+  * If the selected tab has no icon (or no tab is selected), use a (admittedly ugly) default icon.
+@@ -73,7 +73,7 @@
+  *
+  * https://tools.suckless.org/tabbed/patches/icon/
+  */
+-#define ICON_PATCH 0
++#define ICON_PATCH 1
+ 
+ /* With this patch, handling key input is done with keycodes instead of keysyms making
+  * the keyboard layout independent.
+@@ -85,12 +85,12 @@
+  * For example usage see: hidetabs
+  * https://tools.suckless.org/tabbed/patches/keyrelease/
+  */
+-#define KEYRELEASE_PATCH 0
++#define KEYRELEASE_PATCH 1
+ 
+ /* Add a decorative separator bar to the beginning of each tab.
+  * https://tools.suckless.org/tabbed/patches/separator/
+  */
+-#define SEPARATOR_PATCH 0
++#define SEPARATOR_PATCH 1
+ 
+ /* This patch allows tabbed colors to be defined via Xresources.
+  * https://tools.suckless.org/tabbed/patches/xresources/
