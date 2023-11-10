@@ -12,6 +12,14 @@ case $dmenu in
 esac
 }
 
+refstbg(){
+    # printf "%x\n" 230
+    # printf "%d\n" 0xe600
+    [ ! -e ~/.cache/st_layer.ff ] && \
+      ff-blank 1920 1080 11520 11520 11520 52224 > ~/.cache/st_layer.ff
+    ff-composite < ~/.cache/st_bg.ff ~/.cache/st_layer.ff 0,0,2 > ~/.cache/st_wallpaper.ff
+}
+
 _tmux(){
 tmux ls 2> /dev/null
 if [ $? = 1 ]; then
@@ -32,5 +40,6 @@ fi
 
 case $1 in
     logout ) logout ;;
+    refstbg ) refstbg ;;
     tmux ) _tmux ;;
 esac
