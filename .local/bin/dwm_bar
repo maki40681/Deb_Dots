@@ -1,17 +1,15 @@
 #!/bin/sh
 
-ws=" "
-
 vol(){
 vol=$(amixer get Master \
      | sed -nE '/Front Left/s/(.*)(\[[0-9]{1,3}%\])(.*)/\2/p')
 
-  printf '%s' " ^c#cc99cc^  ${vol} ^c#ffffff^ $ws "
+  printf '%s' " ^c#cc99cc^  ${vol} ^c#ffffff^   "
 }
 
 clk(){ 
 date=$(date "+%d %b (%a) %l:%M %p")
-  printf '%s' "$ws ^c#66cccc^  $date "
+  printf '%s' " ^c#66cccc^  $date "
 }
 
 cpu(){
@@ -21,7 +19,7 @@ prevtotal=$((a+b+c+previdle))
   read -r cpu a b c idle rest < /proc/stat
 total=$((a+b+c+idle))
 cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
-  printf '%s' " ^c#f2777a^  $cpu % "
+  printf '%s' "^c#f2777a^  $cpu %"
 }
 
 net(){
@@ -46,7 +44,7 @@ ram=$(free -h \
 tmp(){
 tmp=$(sensors \
       | sed -nE '/CPU/s/(.*)\+(.*)/\2/p')
-  printf '%s' "^c#ffffff^   $ws ^c#ffcc66^ $tmp "
+  printf '%s' "^c#ffffff^   ^c#ffcc66^  $tmp"
 }
 
 case $1 in
