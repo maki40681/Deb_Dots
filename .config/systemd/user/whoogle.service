@@ -1,0 +1,17 @@
+[Unit]
+Description=Starts Whoogle #installed using pipx
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+Environment=WHOOGLE_AUTOCOMPLETE=0
+Environment=WHOOGLE_CONFIG_THEME=dark
+Environment=WHOOGLE_CONFIG_STYLE=":root { --whoogle-dark-background: #2d2d2d; --whoogle-dark-accent: #747369; --whoogle-dark-text: #d3d0c8; --whoogle-dark-contrast-text: #747369; --whoogle-dark-secondary-text: #f2f0ec; --whoogle-dark-result-bg: #2d2d2d; --whoogle-dark-result-title: #99cc99; --whoogle-dark-result-url: #f2777a; --whoogle-dark-result-visited: #cc99cc; }"
+ExecStart=%h/.local/bin/whoogle-search
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target
