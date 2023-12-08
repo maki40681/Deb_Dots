@@ -65,7 +65,7 @@ pkgfs()
 
 slbuild()
 {
-  make install; rm *.o
+  [ -e config.h ] && make install && rm *.o && \
   find ./ -type f -executable -exec rm {} \;
 }
 
