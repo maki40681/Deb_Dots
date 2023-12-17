@@ -38,15 +38,19 @@ RKBPS=$((RBPS / 1024))
 }
 
 ram(){
-ram=$(free -h \
-     | sed -nE '2s/([^ ]* *){2}([^ ]*).*/\2/p')
-  printf '%s' " ^c#99cc99^  $ram "
+set -- $(free -h)
+  printf '%s' " ^c#99cc99^  $9 "
 }
 
 tmp(){
 tmp=$(sensors \
       | sed -nE '/CPU/s/(.*)\+(.*)/\2/p')
   printf '%s' "^c#ffffff^   ^c#ffcc66^  $tmp"
+}
+
+bat(){
+bat=$(cat /sys/class/power_supply/BAT0/capacity)
+    [ $bat != 100 ] && printf '%s' " ^c#2d2d2d^^b#d3d0c8^ 󱐋 $bat % ^d^" || printf '%s'
 }
 
 case $1 in
@@ -56,4 +60,5 @@ case $1 in
     net ) net ;;
     ram ) ram ;;
     tmp ) tmp ;;
+    bat ) bat ;;
 esac
