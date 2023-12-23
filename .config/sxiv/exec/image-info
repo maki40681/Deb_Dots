@@ -4,4 +4,4 @@ filename=$(basename -- "$1")
 filesize=$(du -Hh -- "$1" | cut -f 1)
 geometry="$2x$3"
 
-printf "%s\n" " [   $filename ][  $filesize   $geometry ]"
+printf "%s\n" " [   $filename ]-[ 󰗮 $filesize  󰲎 $geometry ]"
