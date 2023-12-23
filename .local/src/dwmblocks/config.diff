@@ -33,9 +33,10 @@ index 4e619d8..f702f0e 100644
 -    X("sb-volume", 0, 8)  \
 -    X("sb-battery", 5, 9) \
 -    X("sb-date", 1, 10)
-+    X("dwm_bar net", 3, 6)  \
-+    X("dwm_bar tmp", 3, 5)   \
-+    X("dwm_bar cpu", 3, 4) \
++    X("dwm_bar net", 3, 7) \
++    X("dwm_bar tmp", 3, 6) \
++    X("dwm_bar cpu", 3, 5) \
++    X("dwm_bar bat", 60, 4) \
 +    X("dwm_bar ram", 3, 3) \
 +    X("dwm_bar vol", 0, 2) \
 +    X("dwm_bar clk", 60, 1)
