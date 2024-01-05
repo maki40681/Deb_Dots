@@ -1,15 +1,28 @@
 #!/bin/sh
 
 logout(){
-dmenu="$(printf ":b  Sleep\n:b  Shutdown\n:b  Logout\n:b  Restart " \
-	| dmenu -c -p "RUN " -l 7 -fn "JetBrainsMono NF:size=13" -bw 3)"
+if [ "$(loginctl show-session self -p Type)" = 'Type=wayland' ]
+then
+    bemenu="$(printf " Sleep  \n Shutdown  \n Logout  \n Restart  \n" \
+	    | bemenu -H 34 --ch 24 --fn 'JetBrainsMono Nerd Font [10]' -p 'debian  ' --tb '#2d2d2d' --tf '#f2777a' --fb '#2d2d2d' --ff '#6699cc' --nb '#2d2d2d' --nf '#747369' --hb '#2d2d2d' --hf '#d3d0c8' --ab '#2d2d2d' --af '#747369')"
 
-case $dmenu in
-    ":b  Sleep" ) systemctl suspend ;;
-    ":b  Shutdown" ) systemctl poweroff ;;
-    ":b  Logout" ) xsetroot -name fsignal:1 ;;
-    ":b  Restart " ) systemctl reboot
-esac
+    case $bemenu in
+	" Sleep  " ) systemctl suspend ;;
+	" Shutdown  " ) systemctl poweroff ;;
+	" Logout  " ) riverctl exit ;;
+	" Restart  " ) systemctl reboot
+    esac
+else
+    dmenu="$(printf ":b  Sleep\n:b  Shutdown\n:b  Logout\n:b  Restart" \
+	    | dmenu -c -p "RUN " -l 7 -fn "JetBrainsMono NF:size=13" -bw 3)"
+
+    case $dmenu in
+        ":b  Sleep" ) systemctl suspend ;;
+	":b  Shutdown" ) systemctl poweroff ;;
+	":b  Logout" ) xsetroot -name fsignal:1 ;;
+	":b  Restart" ) systemctl reboot
+    esac
+fi
 }
 
 refstbg(){
