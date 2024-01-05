@@ -10,5 +10,5 @@ truncation_length = 1
 truncate_to_repo = true
 home_symbol="󰜥 "
 style = "bold purple"
-read_only = "󰌾 "
+read_only = " 󰌾 "
 read_only_style = "bold blue"

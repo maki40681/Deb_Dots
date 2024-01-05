@@ -5,7 +5,7 @@ vol=$(amixer get Master \
      | sed -nE '/Front Left:/s/(.*)(\[[0-9]{1,3}%\])(.*)/\2/p')
 [ "$(amixer get Master | sed -nE '/Front Left:/s/^(.*)(..).$/\2/p')" = on ] && icon= || icon=
 
-  printf '%s' " ^c#cc99cc^ $icon $vol ^c#ffffff^   "
+  printf '%s' "^c#cc99cc^ $icon $vol ^c#ffffff^   "
 }
 
 clk(){ 
@@ -34,12 +34,12 @@ TBPS=$((T2 - T1))
 RBPS=$((R2 - R1))
 TKBPS=$((TBPS / 1024))
 RKBPS=$((RBPS / 1024))
-  printf '%s' " ^c#6699cc^  $RKBPS kb   $TKBPS kb"
+  printf '%s' "^c#6699cc^  $RKBPS kb   $TKBPS kb"
 }
 
 ram(){
 set -- $(free -h)
-  printf '%s' " ^c#99cc99^  $9 "
+  printf '%s' "^c#99cc99^  $9"
 }
 
 tmp(){
@@ -50,7 +50,7 @@ tmp=$(sensors \
 
 bat(){
 bat=$(cat /sys/class/power_supply/BAT0/capacity)
-    [ $bat != 100 ] && printf '%s' " ^c#2d2d2d^^b#d3d0c8^ 󱐋 $bat % ^d^" || printf '%s'
+    [ $bat != 100 ] && printf '%s' "^c#2d2d2d^^b#d3d0c8^ 󱐋 $bat % ^d^" || printf '%s'
 }
 
 case $1 in
