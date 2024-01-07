@@ -1,0 +1,6 @@
+[global]
+    offset = 8x32
+    background = "#2d2d2d"
+    foreground = "#f2f0ec"
+    frame_color = "#d3d0c8"
+    font = JetBrainsMono NF 10
