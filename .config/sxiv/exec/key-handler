@@ -13,7 +13,13 @@ case "$1" in
 
 "C-j")	    mogrify -format jpg "$rfile" ;;
 
-"C-c")	    convert "$rfile" -resize 1920x1080\! "$rfile" ;;
+# when height is more
+"C-c")	    convert "$rfile" -scale 1920x "$rfile" && \
+	    aspectcrop -a 16:9 "$rfile" "$rfile" ;;
+
+# when width is more
+"C-v")	    convert "$rfile" -scale x1080 "$rfile" && \
+	    aspectcrop -a 16:9 "$rfile" "$rfile" ;;
 
 "C-w")	    jpg2ff < "$rfile" \
             > ~/.cache/st_bg.ff; \
