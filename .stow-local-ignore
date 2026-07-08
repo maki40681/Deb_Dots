@@ -3,7 +3,4 @@ root
 \.git
 \.stowrc
 \.gitignore
-\.local/src/st
-\.local/src/dwm
-\.config/ueberzugpp
 \.config/legacy

@@ -1,5 +1,6 @@
+picom -b --vsync
 xset r rate 300 30
-redshift -P -O 4500
+redshift -P -O 3000
 hsetroot -solid \#2d2d2d
 xsetroot -cursor_name left_ptr
 xrdb -load ~/.config/X11/Xresources

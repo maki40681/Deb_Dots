@@ -60,7 +60,7 @@ handle_image() {
             exit 7;;
 
         video/*)
-            ffmpegthumbnailer -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 0 && exit 6
+            ffmpegthumbnailer -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 0 -m && exit 6
             exit 1;;
 
         audio/*)

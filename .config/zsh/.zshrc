@@ -33,10 +33,10 @@ alias \
       sx='ssh-agent startx "$XDG_CONFIG_HOME/X11/xinitrc" &> /tmp/dwm.log' \
 
 alias \
-      pkgr='sudo apt remove' \
-      pkgi='sudo apt install' \
-      pkgup='sudo apt update' \
-      pkgug='sudo apt upgrade'
+      pkgr='sudo nala remove' \
+      pkgi='sudo nala install' \
+      pkgup='sudo nala update' \
+      pkgug='sudo nala upgrade'
 
 alias \
       ga='git add' \
@@ -61,6 +61,18 @@ pkgfs()
   | sed -nE 's/([a-z-]*):(.*)/\1/p' \
   | uniq \
   | less
+}
+
+rnamewall()
+{
+  for file in $(ls ~/PICs/WALLs \
+    | egrep -v '^.{6}\.jpg$')
+  do
+    cd ~/PICs/WALLs
+    mv -v "$file" $(tr -dc a-z0-9 < /dev/urandom \
+		    | head -c 6; echo '').jpg
+    cd - > /dev/null
+  done
 }
 
 slbuild()
