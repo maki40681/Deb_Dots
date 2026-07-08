@@ -1,0 +1,15 @@
+#!/bin/sh
+
+IDLE_THRESHOLD=1500000
+
+while true; do
+    IDLE_TIME=$(xprintidle)
+    
+    if [ "$IDLE_TIME" -ge "$IDLE_THRESHOLD" ]
+	then
+	notify-send "System is Idling. Shutting down..."
+	sleep 60
+	systemctl poweroff
+    fi
+
+done
