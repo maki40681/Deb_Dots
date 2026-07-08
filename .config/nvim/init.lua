@@ -1,7 +1,8 @@
 --[[https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/]]--
 
-require('kolors')
 require('statusline')
+require('kolors')
+--require("config.lazy")
 
 --[[ OPTS ]]--
 local set = vim.opt
@@ -34,8 +35,10 @@ set.mouse = "a"
 set.showcmd = true
 set.wildmenu = true
 set.swapfile = false
+set.termguicolors = true
 set.clipboard = "unnamedplus"
 set.selectmode = set.selectmode + 'mouse'
+set.formatoptions:remove({ "r", "o", "c" })
 set.guifont = "FantasqueSansMono Nerd Font:h11:cDEFAULT"
 
 --[[ VARS ]]--
