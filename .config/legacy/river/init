@@ -1,5 +1,6 @@
 #!/bin/sh
 
+mako &
 waybar &
 nm-applet &
 #jamesdsp -t &
@@ -7,8 +8,8 @@ redshift -P -O 4500 &
 
 riverctl map normal Super Space spawn "bemenu-run -H 34 --ch 24 --fn 'JetBrainsMono Nerd Font [10]' -p 'debian  ' --tb '#2d2d2d' --tf '#f2777a' --fb '#2d2d2d' --ff '#6699cc' --nb '#2d2d2d' --nf '#747369' --hb '#2d2d2d' --hf '#d3d0c8' --ab '#2d2d2d' --af '#747369'"
 
-riverctl map normal Super Return spawn foot
-riverctl map normal Super+Control Return spawn "say tmux; foot -e tmux attach -t TMUX"
+riverctl map normal Super Return spawn st
+riverctl map normal Super+Control Return spawn "say tmux; st -t \"Suckless Terminal\" -e tmux attach -t TMUX"
 
 riverctl map normal Super+Shift B spawn firefox
 
@@ -83,17 +84,21 @@ do
 
 done
 
+riverctl rule-add ssd
+riverctl rule-add -app-id firefox-esr tags 2
+riverctl rule-add -app-id Waydroid fullscreen
+
 riverctl background-color 0x2d2d2d
 riverctl border-color-focused 0xd3d0c8
 riverctl border-color-unfocused 0x747369
-
-riverctl set-repeat 30 300
-
-riverctl default-layout rivertile
-rivertile -view-padding 4 -outer-padding 4 -main-ratio 0.55
 
 riverctl input pointer-1102-4618-DELL0810:00_044E:120A_Touchpad events enabled
 riverctl input pointer-1102-4618-DELL0810:00_044E:120A_Touchpad tap enabled             
 riverctl input pointer-1102-4618-DELL0810:00_044E:120A_Touchpad pointer-accel 0.3
 riverctl input pointer-1102-4618-DELL0810:00_044E:120A_Touchpad accel-profile adaptive
 riverctl input pointer-1102-4618-DELL0810:00_044E:120A_Touchpad click-method clickfinger
+
+riverctl set-repeat 30 300
+
+riverctl default-layout rivertile
+rivertile -view-padding 4 -outer-padding 4 -main-ratio 0.55

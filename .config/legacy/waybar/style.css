@@ -5,57 +5,46 @@
 }
 
 window#waybar {
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(45,45,45,0);
 }
 
-#tags {
+#workspaces {
     padding: 1px;
     margin-bottom: 2px;
     border: 2px solid #d3d0c8;
     background-color: #2d2d2d;
 }
 
-#tags button {
+#workspaces button:hover {
+    text-shadow: inherit;
+    background: inherit;
+}
+
+#workspaces button {
     margin: 1px;
     padding: 1px;
     color: #d3d0c8;
     border: 2px solid #2d2d2d;
 }
 
-#tags button:hover {
-    box-shadow: inherit;
-    background: #2d2d2d;
-    text-shadow: inherit;
-}
-
-#tags button.focused {
+#workspaces button.active {
     color: #2d2d2d;
     border: 2px solid #2d2d2d;
     background-color: #d3d0c8;
 }
 
-#tags button.occupied {
+#workspaces button.visible {
     border: 2px solid #d3d0c8;
 }
 
-#tags button.urgent {
+#workspaces button.urgent {
     border: 2px solid #f2777a;
-}
-
-#tags button.occupied.urgent {
-    border: 2px solid #f2777a;
-}
-
-#tags button.focused.occupied {
-    color: #2d2d2d;
-    background-color: #d3d0c8;
-    border: 2px solid #d3d0c8;
 }
 
 #window {
     font-size: 14px;
     color: #d3d0c8;
-    margin-top: 8px;
+    margin-top: -2px;
     padding: 0px 5px;
     margin-bottom: 2px;
     background-color: #2d2d2d;

@@ -1,18 +1,30 @@
 {
   "modules-left": [
-    "river/tags"
+    "hyprland/workspaces"
   ],
   "modules-center": [
-    "river/window"
+    "hyprland/window"
   ],
   "modules-right": [
     "tray",
     "custom/volume",
     "clock"
   ],
-  "river/window": {
-    "max-length": 165
-  },
+  "hyprland/workspaces": {
+	"format": "{icon}",
+	"workspace-taskbar": "enable",
+	"format-icons": {
+		"1": "  一  ",
+		"2": "  二  ",
+		"3": "  三  ",
+		"4": "  四  ",
+		"5": "  五  ",
+		"6": "  六  ",
+		"7": "  七  ",
+		"8": "  八  ",
+		"9": "  九  "
+	}
+},
   "custom/volume": {
     "exec": "pamixer --get-volume-human",
     "interval": "once",
@@ -29,7 +41,7 @@
     "tooltip": false
   },
   "tray": {
-    "icon-size": 25,
+    "icon-size": 22,
     "spacing": 8
   }
 }

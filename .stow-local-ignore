@@ -6,3 +6,4 @@ root
 \.local/src/st
 \.local/src/dwm
 \.config/ueberzugpp
+\.config/legacy
