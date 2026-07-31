@@ -3,4 +3,4 @@ root
 \.git
 \.stowrc
 \.gitignore
-\.config/legacy
+\.legacy

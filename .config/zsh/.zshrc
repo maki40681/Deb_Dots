@@ -87,6 +87,22 @@ stove()
   stow .; cd - > /dev/null
 }
 
+y()
+{
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    	builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}
+
+swayimg-delete() {
+    while IFS= read -r file; do
+        rm -f -- "$file"
+    done < <(swayimg "$@")
+}
+
 #=-[ZSH PLUGINS]-=#
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -99,4 +115,5 @@ bindkey "^[[1;5D" backward-word
 bindkey '^[OA' history-substring-search-up
 bindkey '^[OB' history-substring-search-down
 
+eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"

@@ -7,7 +7,7 @@ hl.monitor({
 })
 
 ---- MY PROGRAMS ----
-local terminal    = "st"
+local terminal    = "ghostty"
 local fileManager = "nemo"
 local browser	  = "helium"
 local menu        = "bemenu-run -H 20 --ch 24 --fn 'JetBrainsMono Nerd Font [10]' -p 'debian  ' --tb '#2d2d2d' --tf '#f2777a' --fb '#2d2d2d' --ff '#6699cc' --nb '#2d2d2d' --nf '#747369' --hb '#2d2d2d' --hf '#d3d0c8' --ab '#2d2d2d' --af '#747369'"
@@ -18,7 +18,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("nm-applet")
   hl.exec_cmd("blueman-applet")
   hl.exec_cmd("swaybg -c 2d2d2d")
-  hl.exec_cmd("redshift -P -O 3000")
+  hl.exec_cmd("hyprsunset -t 3000")
 end)
 
 ---- ENVIRONMENT VARIABLES ----
@@ -34,6 +34,8 @@ hl.env("QT_QPA_PLATFORMTHEME", "qt5ct")
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("XDG_SESSION_DESKTOP", "Hyprland")
+
+hl.env("EGET_CONFIG", "~/.config/eget/eget.toml")
 ----- PERMISSIONS -----
 -- hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
 -- hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
@@ -52,6 +54,7 @@ hl.config({
         },
 
         layout = "master",
+	resize_corner = 3,
     },
 
     decoration = {
@@ -109,8 +112,9 @@ hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + CONTROL + RETURN", hl.dsp.exec_cmd("say tmux && st -e tmux attach -t TMUX"))
+hl.bind(mainMod .. " + CONTROL + RETURN", hl.dsp.exec_cmd("say tmux && ghostty -e tmux attach -t TMUX"))
 
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hypridle"))
 local closeWindowBind = hl.bind(mainMod .. " + W", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("say logout"))
 
@@ -143,17 +147,28 @@ hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
 
 hl.bind("Print", hl.dsp.exec_cmd("grim -g \"$(slurp -d)\" - | wl-copy"))
+hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd("grim"))
 
 ---- WINDOW MX ----
 hl.config({
     master = {
         new_status = "master",
 	new_on_top = true,
+	drop_at_cursor = true,
     },
 })
 
-hl.bind(mainMod .. " + J", hl.dsp.layout("cyclenext"))
-hl.bind(mainMod .. " + K", hl.dsp.layout("cycleprev"))
+hl.config({
+    scrolling = {
+	column_width = 0.95,
+	focus_fit_method = 0
+    }
+    })
+
+--hl.bind(mainMod .. " + K", hl.dsp.layout("cycleprev"))
+hl.bind(mainMod .. " + K", hl.dsp.focus({direction = "up"}))
+hl.bind(mainMod .. " + J", hl.dsp.window.cycle_next({ next = true, tiled = true, floating = false }))
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.cycle_next({ next = true, tiled = false, floating = true }))
 
 hl.bind(mainMod .. " + I", hl.dsp.layout("addmaster"))
 hl.bind(mainMod .. " + D", hl.dsp.layout("removemaster"))
@@ -262,6 +277,39 @@ hl.window_rule({
 ---- WINDOW RULES ----
 hl.window_rule({ match = { class = browser }, workspace = 2 })
 hl.window_rule({ match = { class = fileManager }, workspace = 3 })
+hl.window_rule({ match = { class = "org.pwmt.zathura" }, workspace = 3 })
 hl.window_rule({ match = { class = "mpv" }, workspace = 4 })
 hl.window_rule({ match = { class = "vesktop" }, workspace = 5 })
-hl.window_rule({ match = { class = "telegram-desktop" }, workspace = 6 })
+hl.window_rule({ match = { class = "org.telegram.desktop" }, workspace = 6 })
+hl.window_rule({ match = { title = ".*Minecraft.*" }, workspace = 9 })
+
+hl.window_rule({ match = { class = "chrome-nngceckbapebfimnlniiiahkandclblb-Default" }, float = true })
+hl.window_rule({ match = { class = "xdg-desktop-portal-gtk" }, size = "1000 800", center = true })
+
+hl.bind(mainMod .. " + Y", function ()
+    local layouts     = { "master", "scrolling" }
+    local workspace   = hl.get_active_workspace()
+	if hl.get_active_special_workspace() then
+		workspace = hl.get_active_special_workspace()
+	end
+
+    local next_layout = "scrolling"
+
+    if not workspace then
+        return
+    end
+
+    for i = 1, #layouts do
+        if layouts[i] == workspace.tiled_layout then
+            local next_layout_idx = (i % #layouts) + 1
+            next_layout = layouts[next_layout_idx]
+            break
+        end
+    end
+
+	if workspace.special then
+		hl.workspace_rule({ workspace = tostring(workspace.name), layout = next_layout })
+	else
+		hl.workspace_rule({ workspace = tostring(workspace.id), layout = next_layout })
+	end
+end)
