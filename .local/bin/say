@@ -1,37 +1,15 @@
 #!/bin/sh
 
 logout(){
-if [ "$(loginctl show-session self -p Type)" = 'Type=wayland' ]
-then
     bemenu="$(printf " Sleep  \n Shutdown  \n Logout  \n Restart  \n" \
 	    | bemenu -H 20 --ch 24 --fn 'JetBrainsMono Nerd Font [10]' -p 'debian  ' --tb '#2d2d2d' --tf '#f2777a' --fb '#2d2d2d' --ff '#6699cc' --nb '#2d2d2d' --nf '#747369' --hb '#2d2d2d' --hf '#d3d0c8' --ab '#2d2d2d' --af '#747369')"
 
     case $bemenu in
-	" Sleep  " ) systemctl suspend ;;
-	" Shutdown  " ) systemctl poweroff ;;
-	" Logout  " ) hyprctl dispatch 'hl.dsp.exit()' ;;
-	" Restart  " ) systemctl reboot
+	" Sleep  " )  systemctl suspend ;;
+	" Shutdown  " ) hyprshutdown -p 'shutdown -P 0' ;;
+	" Logout  " ) hyprshutdown ;;
+	" Restart  " ) hyprshutdown -p 'reboot'
     esac
-else
-    dmenu="$(printf ":b  Sleep\n:b  Shutdown\n:b  Logout\n:b  Restart" \
-	    | dmenu -c -p "RUN " -l 7 -fn "JetBrainsMono NF:size=13" -bw 3)"
-
-    case $dmenu in
-        ":b  Sleep" ) systemctl suspend ;;
-	":b  Shutdown" ) systemctl poweroff ;;
-	":b  Logout" ) xsetroot -name fsignal:1 ;;
-	":b  Restart" ) systemctl reboot
-    esac
-fi
-}
-
-refstbg(){
-    # printf "%x\n" 230
-    # printf "%d\n" 0xe600
-    [ ! -e ~/.cache/st_layer.ff ] && \
-      #ff-blank 1920 1080 11520 11520 11520 52224 > ~/.cache/st_layer.ff
-      ff-blank 1920 1080 11520 11520 11520 51200 > ~/.cache/st_layer.ff
-    ff-composite < ~/.cache/st_bg.ff ~/.cache/st_layer.ff 0,0,2 > ~/.cache/st_wallpaper.ff
 }
 
 _tmux(){
@@ -44,8 +22,11 @@ printf "Starting TMUX session\n" && \
     tmux rename-window -t TMUX:2 '    file_manager ' && \
     tmux new-window -t TMUX && \
     tmux rename-window -t TMUX:3 '    text_editor ' && \
-    tmux send-keys -t TMUX:2 'while true; do; ranger && clear; done' C-m && \
+    tmux new-window -t TMUX && \
+    tmux rename-window -t TMUX:4 '  󰎇  μsik ' && \
+    tmux send-keys -t TMUX:2 'sleep 3 && while true; do; yazi && clear; done' C-m && \
     tmux send-keys -t TMUX:3 'while true; do; nvim; done' C-m && \
+    tmux send-keys -t TMUX:4 'ytm' C-m && \
     tmux select-window -t 1
 else
     printf "TMUX is already running\n"
@@ -54,6 +35,5 @@ fi
 
 case $1 in
     logout ) logout ;;
-    refstbg ) refstbg ;;
     tmux ) _tmux ;;
 esac
