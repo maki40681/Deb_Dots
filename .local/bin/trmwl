@@ -1,0 +1,22 @@
+#!/bin/sh
+
+input="$1"
+
+dir=$(dirname -- "$input")
+
+while :; do
+    name=$(tr -dc 'a-z0-9' </dev/urandom | head -c6)
+    output="$dir/$name.jpg"
+    [ ! -e "$output" ] && break
+done
+
+ffmpeg -loglevel error -y \
+    -i "$input" \
+    -vf "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080" \
+    -q:v 2 \
+    "$output" &&
+rm -- "$input"
+
+cp -f -- "$output" ~/.cache/ghostty.jpg
+
+printf '%s\n' "$output"
