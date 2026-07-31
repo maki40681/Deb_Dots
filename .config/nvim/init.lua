@@ -1,8 +1,8 @@
 --[[https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/]]--
 
-require('statusline')
 require('kolors')
---require("config.lazy")
+require('statusline')
+require("config.lazy")
 
 --[[ OPTS ]]--
 local set = vim.opt
@@ -50,8 +50,8 @@ vim.g['netrw_browse_split'] = 4
 --[[ BINDS ]]--
 local setkey = vim.api.nvim_set_keymap
 
-setkey('n', 'gn', ':tabN<CR>', {noremap = true})
-setkey('n', 'gp', ':tabp<CR>', {noremap = true})
+setkey('n', 'gn', ':tabnext<CR>', {noremap = true})
+setkey('n', 'gp', ':tabprevious<CR>', {noremap = true})
 setkey('n', 'gt', ':tabnew<CR>', {noremap = true})
 setkey('n', 'gd', ':tabc<CR>', {noremap = true})
 
@@ -64,13 +64,13 @@ setkey('n', '<A-tab>', '<C-w>w', {noremap = true})
 
 setkey('t', '<Esc>', '<C-\\><C-n>', {noremap = true})
 
-setkey('n', '<A-e>', ':Lexplore<CR>', {noremap = true})
+local fzf = require("fzf-lua")
+vim.keymap.set("n", "<A-e>", fzf.oldfiles,   { desc = "Recent files" })
+vim.keymap.set("n", "<A-r>", fzf.files,      { desc = "Find files" })
+vim.keymap.set("n", "<A-b>", fzf.buffers,    { desc = "Buffers" })
 
-vim.cmd [[
-
-autocmd TabNew * call feedkeys(":Lexplore\<CR>", 'n')
-autocmd BufWritePost $HOME/.local/src/dwm/dwm.c !cd $HOME/.local/src/dwm; make install && xsetroot -name fsignal:2
-autocmd BufWritePost $HOME/.local/src/dwm/config.h !cd $HOME/.local/src/dwm; make install && xsetroot -name fsignal:2
-autocmd BufWritePost $HOME/PiroGramming/main.c !cd $HOME/PiroGramming/; gcc main.c && ./a.out
-
-]]
+vim.api.nvim_create_autocmd("TabNewEntered", {
+    callback = function()
+        require("fzf-lua").oldfiles()
+    end,
+})
