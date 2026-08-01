@@ -115,6 +115,7 @@ hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + CONTROL + RETURN", hl.dsp.exec_cmd("say tmux && ghostty -e tmux attach -t TMUX"))
 
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hypridle"))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprlock"))
 local closeWindowBind = hl.bind(mainMod .. " + W", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("say logout"))
 
