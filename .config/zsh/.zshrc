@@ -29,7 +29,6 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 #=-[ALIASES]-=#
 alias \
       ll='exa -lah' \
-      killmux='tmux kill-session -t TMUX' \
       sx='ssh-agent startx "$XDG_CONFIG_HOME/X11/xinitrc" &> /tmp/dwm.log' \
 
 alias \
