@@ -3,19 +3,31 @@
 input="$1"
 
 dir=$(dirname -- "$input")
+base=$(basename -- "$input")
+stem="${base%.*}"
 
-while :; do
-    name=$(tr -dc 'a-z0-9' </dev/urandom | head -c6)
-    output="$dir/$name.jpg"
-    [ ! -e "$output" ] && break
-done
+if printf '%s' "$stem" | grep -Eq '^[a-z0-9]{6}$'; then
+    output="$dir/$stem.jpg"
+else
+    while :; do
+        name=$(tr -dc 'a-z0-9' </dev/urandom | head -c6)
+        output="$dir/$name.jpg"
+        [ ! -e "$output" ] && break
+    done
+fi
 
-ffmpeg -loglevel error -y \
-    -i "$input" \
-    -vf "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080" \
-    -q:v 2 \
-    "$output" &&
-rm -- "$input"
+mime=$(file -Lb --mime-type -- "$input")
+
+if [ "$mime" = "image/jpeg" ]; then
+    [ "$input" != "$output" ] && mv -- "$input" "$output"
+else
+    ffmpeg -loglevel error -y \
+        -i "$input" \
+        -vf "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080" \
+        -q:v 2 \
+        "$output" &&
+    rm -- "$input"
+fi
 
 cp -f -- "$output" ~/.cache/ghostty.jpg
 
