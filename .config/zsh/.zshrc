@@ -102,6 +102,22 @@ swayimg-delete() {
     done < <(swayimg "$@")
 }
 
+smv()
+{
+    local target=$1
+
+    [[ -z $target ]] && {
+        print -u2 "Usage: smv <target-directory>"
+        return 1
+    }
+
+    mkdir -p -- "$target" || return
+
+    swayimg * | while IFS= read -r file; do
+        mv -v -- "$file" "$target/"
+    done
+}
+
 #=-[ZSH PLUGINS]-=#
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
