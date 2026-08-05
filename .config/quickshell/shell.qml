@@ -48,7 +48,7 @@ PanelWindow {
 	                color: isActive ? "#2d2d2d" : (ws ? "#f2f0ec" : "#666666")
 	    
 	                font {
-	        	    family: "JetBrainsMono"
+	        	    family: "JetBrainsMono Nerd Font"
 	                    pixelSize: 16
 			    bold: true
 	                }
@@ -105,7 +105,7 @@ PanelWindow {
 	    Text {
 
 	        font {
-	            family: "JetBrainsMono"
+	            family: "JetBrainsMono Nerd Font"
 	            pixelSize: 16
 	        }
 
@@ -260,7 +260,7 @@ PanelWindow {
 	                bold: false
 	            }
 	    
-	            text: `   ${cpuWidget.usage}%`
+	            text: ` ${cpuWidget.usage}%`
 	        }
 	    
 	        FileView {
@@ -329,7 +329,7 @@ PanelWindow {
 	                bold: false
 	            }
 	    
-	            text: `   ${ramWidget.usage}`
+	            text: ` ${ramWidget.usage}`
 	        }
 	    
 	        FileView {

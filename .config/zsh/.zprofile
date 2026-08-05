@@ -17,6 +17,8 @@ export TMUX_TMPDIR=$XDG_STATE_HOME
 export MANPAGER="nvim -c 'Man!' -o -"
 export GTK2_RC_FILES=$XDG_CONFIG_HOME/gtk-2.0/gtkrc
 
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/openssh_agent"
+
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
     #exec dbus-run-session dwl &> /tmp/dwl.log
     #exec ssh-agent startx "$XDG_CONFIG_HOME/X11/xinitrc" &> /tmp/dwm.log
