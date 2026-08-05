@@ -1,6 +1,6 @@
 xtra
 root
+legacy
 \.git
 \.stowrc
 \.gitignore
-\.legacy
