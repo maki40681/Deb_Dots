@@ -1,0 +1,23 @@
+[mgr]
+
+prepend_keymap = [
+    { on = [ "g", "h" ], run = "cd ~", desc = "home" },
+    { on = [ "g", "/" ], run = "cd /", desc = "/" },
+    { on = [ "g", "t" ], run = "cd /tmp", desc = "tmp" },
+    { on = [ "g", "d" ], run = "cd ~/DLDs", desc = "DLDs" },
+    { on = [ "g", "P" ], run = "cd ~/PDFs", desc = "PDFs" },
+    { on = [ "g", "p" ], run = "cd ~/PICs", desc = "PICs" },
+    { on = [ "g", "v" ], run = "cd ~/VIDs", desc = "VIDs" },
+    { on = [ "g", "m" ], run = "cd ~/μsik", desc = "μsik" },
+    { on = [ "g", "C" ], run = "cd ~/.config", desc = "config" },
+    { on = [ "g", "b" ], run = "cd ~/.local/bin", desc = "bin" },
+    { on = [ "g", "s" ], run = "cd ~/.local/share", desc = "share" },
+    { on = [ "g", "c" ], run = "cd ~/.git-repos/way_dots", desc = "deb_dots" },
+
+    { on = [ "b", "g" ], run = "shell -- trmwl %s", desc = "term wall" },
+
+    { on ="[", run = "plugin parent-arrow -1" },
+    { on ="]", run = "plugin parent-arrow 1" },
+    { on = "!", for = "unix", run = 'shell "$SHELL" --block', desc = "Open $SHELL here"}
+]
+

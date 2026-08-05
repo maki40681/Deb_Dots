@@ -1,0 +1,14 @@
+format = "  $directory$character"
+
+[character]
+success_symbol = "[ ](bold blue)[ ➜ ](bold green)"
+error_symbol = "[ ](bold blue)[ ➜ ](bold red)"
+vicmd_symbol = "[ ](bold blue)[ ➜ ](bold yellow)"
+
+[directory]
+truncation_length = 1
+truncate_to_repo = true
+home_symbol="󰜥 "
+style = "bold purple"
+read_only = " 󰌾 "
+read_only_style = "bold blue"
