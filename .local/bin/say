@@ -2,13 +2,13 @@
 
 logout(){
     bemenu="$(printf " Sleep  \n Shutdown  \n Logout  \n Restart  \n" \
-	    | bemenu -H 20 --ch 24 --fn 'JetBrainsMono Nerd Font [10]' -p 'debian  ' --tb '#2d2d2d' --tf '#f2777a' --fb '#2d2d2d' --ff '#6699cc' --nb '#2d2d2d' --nf '#747369' --hb '#2d2d2d' --hf '#d3d0c8' --ab '#2d2d2d' --af '#747369')"
+	    | bemenu -H 20 --ch 24 --fn 'JetBrainsMono Nerd Font 11' -p 'debian  ' --tb '#2d2d2d' --tf '#f2777a' --fb '#2d2d2d' --ff '#6699cc' --nb '#2d2d2d' --nf '#747369' --hb '#2d2d2d' --hf '#d3d0c8' --ab '#2d2d2d' --af '#747369')"
 
     case $bemenu in
 	" Sleep  " )  systemctl suspend ;;
-	" Shutdown  " ) hyprshutdown -p 'shutdown -P 0' ;;
-	" Logout  " ) hyprshutdown ;;
-	" Restart  " ) hyprshutdown -p 'reboot'
+	" Shutdown  " ) systemctl poweroff ;;
+	" Logout  " ) hyprctl dispatch 'hl.dsp.exit()' ;;
+	" Restart  " ) systemctl reboot
     esac
 }
 
@@ -26,7 +26,7 @@ printf "Starting TMUX session\n" && \
     tmux rename-window -t TMUX:4 '  󰎇  μsik ' && \
     tmux send-keys -t TMUX:2 'sleep 3 && while true; do; yazi && clear; done' C-m && \
     tmux send-keys -t TMUX:3 'while true; do; nvim; done' C-m && \
-    tmux send-keys -t TMUX:4 'ytm' C-m && \
+    tmux send-keys -t TMUX:4 'while true; do; ytm; done' C-m && \
     tmux select-window -t 1
 else
     printf "TMUX is already running\n"

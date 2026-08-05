@@ -10,7 +10,7 @@ hl.monitor({
 local terminal    = "ghostty"
 local fileManager = "nemo"
 local browser	  = "helium"
-local menu        = "bemenu-run -H 20 --ch 24 --fn 'JetBrainsMono Nerd Font [10]' -p 'debian  ' --tb '#2d2d2d' --tf '#f2777a' --fb '#2d2d2d' --ff '#6699cc' --nb '#2d2d2d' --nf '#747369' --hb '#2d2d2d' --hf '#d3d0c8' --ab '#2d2d2d' --af '#747369'"
+local menu        = "bemenu-run -H 20 --ch 24 --fn 'JetBrainsMono Nerd Font 11' -p 'debian  ' --tb '#2d2d2d' --tf '#f2777a' --fb '#2d2d2d' --ff '#6699cc' --nb '#2d2d2d' --nf '#747369' --hb '#2d2d2d' --hf '#d3d0c8' --ab '#2d2d2d' --af '#747369'"
 
 ---- AUTOSTART ----
 hl.on("hyprland.start", function () 
@@ -29,7 +29,7 @@ hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("GTK_THEME", "Adwaita-dark")
 hl.env("GDK_BACKEND", "wayland,x11,*")
 hl.env("QT_QPA_PLATFORM", "wayland;xcb")
-hl.env("QT_QPA_PLATFORMTHEME", "qt5ct")
+hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_TYPE", "wayland")
