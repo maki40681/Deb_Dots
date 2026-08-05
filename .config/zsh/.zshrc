@@ -76,6 +76,22 @@ stove()
   stow .; cd - > /dev/null
 }
 
+smv()
+{
+    local target=$1
+
+    [[ -z $target ]] && {
+        print -u2 "Usage: smv <target-directory>"
+        return 1
+    }
+
+    mkdir -p -- "$target" || return
+
+    swayimg * | while IFS= read -r file; do
+        mv -v -- "$file" "$target/"
+    done
+}
+
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
