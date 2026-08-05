@@ -115,7 +115,7 @@ hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + CONTROL + RETURN", hl.dsp.exec_cmd("say tmux && ghostty -e tmux attach -t TMUX"))
 
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hypridle"))
-hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprlock & hypridle"))
 local closeWindowBind = hl.bind(mainMod .. " + W", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("say logout"))
 
@@ -166,8 +166,7 @@ hl.config({
     }
     })
 
---hl.bind(mainMod .. " + K", hl.dsp.layout("cycleprev"))
-hl.bind(mainMod .. " + K", hl.dsp.focus({direction = "up"}))
+hl.bind(mainMod .. " + K", hl.dsp.layout("cycleprev"))
 hl.bind(mainMod .. " + J", hl.dsp.window.cycle_next({ next = true, tiled = true, floating = false }))
 hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.cycle_next({ next = true, tiled = false, floating = true }))
 

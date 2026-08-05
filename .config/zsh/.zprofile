@@ -1,15 +1,9 @@
 #=-[ENV VARS]-=#
-export MOZ_WEBRENDER=1
-export MOZ_ENABLE_WAYLAND=1
-export MOZ_DISABLE_RDD_SANDBOX=1
 
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
-
-export XINITRC=$XDG_CONFIG_HOME/X11/xinitrc
-export XAUTHORITY=$XDG_RUNTIME_DIR/Xauthority
 
 export TERMINFO=$XDG_DATA_HOME/terminfo
 export LD_LIBRARY_PATH="$HOME"/.local/lib

@@ -1,21 +1,35 @@
 #!/bin/sh
 
-export background='#2d2d2d'
-export foreground='#d3d0c8'
-
+export bg='#2d2d2d'
 export color0='#2d2d2d'
+export bg_light='#747369'
 export color8='#747369'
+
+export red='#f2777a'
 export color1='#f2777a'
 export color9='#f2777a'
+
+export green='#99cc99'
 export color2='#99cc99'
 export color10='#99cc99'
+
+export yellow='#ffcc66'
 export color3='#ffcc66'
 export color11='#ffcc66'
+
+export blue='#6699cc'
 export color4='#6699cc'
 export color12='#6699cc'
+
+export magenta='#cc99cc'
 export color5='#cc99cc'
 export color13='#cc99cc'
+
+export cyan='#66cccc'
 export color6='#66cccc'
 export color14='#66cccc'
+
+export fg='#d3d0c8'
 export color7='#d3d0c8'
+export fg_dark='#f2f0ec'
 export color15='#f2f0ec'

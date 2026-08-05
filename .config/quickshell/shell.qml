@@ -48,6 +48,7 @@ PanelWindow {
 	                color: isActive ? "#2d2d2d" : (ws ? "#f2f0ec" : "#666666")
 	    
 	                font {
+	        	    family: "JetBrainsMono"
 	                    pixelSize: 16
 			    bold: true
 	                }
@@ -85,6 +86,7 @@ PanelWindow {
 	            font {
 	                family: "Product Sans"
 	                pixelSize: 16
+			bold: true
 	            }
 	        }
 	    
@@ -101,6 +103,12 @@ PanelWindow {
 
 	    // active window title
 	    Text {
+
+	        font {
+	            family: "JetBrainsMono"
+	            pixelSize: 16
+	        }
+
 		text: {
 		    const win = Hyprland.activeToplevel;
         	    const ws = Hyprland.focusedWorkspace;
@@ -252,7 +260,7 @@ PanelWindow {
 	                bold: false
 	            }
 	    
-	            text: `  ${cpuWidget.usage}%`
+	            text: `   ${cpuWidget.usage}%`
 	        }
 	    
 	        FileView {
@@ -391,7 +399,7 @@ PanelWindow {
 	                const icon =
 	                    (sink.audio.muted || sink.audio.volume <= 0.001)
 	                        ? ""
-	                        : sink.audio.volume < 0.1
+	                        : sink.audio.volume < 0.05
 	                            ? "󰖀 "
 	                            : "󰕾 "
 	    
