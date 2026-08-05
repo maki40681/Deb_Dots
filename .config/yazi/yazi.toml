@@ -1,3 +1,5 @@
+# https://github.com/imsi32/yatline.yazi
+
 [mgr]
 ratio          = [ 1, 2, 4 ]
 sort_by        = "alphabetical"
